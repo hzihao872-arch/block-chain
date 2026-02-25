@@ -1,4 +1,16 @@
-﻿node_modules/
-.idealock/
+﻿# .gitignore
+
+node_modules/
+.DS_Store
 .env
-releases/
+dev.db
+dist/
+build/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.log
+*.sqlite
+data/
+__trash_20260225_124836/
