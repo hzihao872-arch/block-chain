@@ -56,6 +56,7 @@ class Settings:
     smtp_from: str = os.getenv("SMTP_FROM", "").strip()
     resend_api_key: str = os.getenv("RESEND_API_KEY", "").strip()
     resend_from: str = os.getenv("RESEND_FROM", "").strip()
+    skip_email_verification: bool = _bool(os.getenv("SKIP_EMAIL_VERIFICATION", "false"), default=False)
 
     server_signing_secret: str = os.getenv("SERVER_SIGNING_SECRET", "")
     vault_encryption_key: str = os.getenv("VAULT_ENCRYPTION_KEY", "")

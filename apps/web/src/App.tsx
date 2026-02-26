@@ -367,6 +367,11 @@ export default function App() {
       const detail = await response.json().catch(() => ({}));
       throw new Error(detail.detail || "邮件发送失败");
     }
+    const data = await response.json().catch(() => ({} as any));
+    const verifyUrl = (data as any).verify_url as string | undefined;
+    if ((data as any).auto_confirm && verifyUrl) {
+      window.location.href = verifyUrl;
+    }
   }
 
   async function handleOneClick() {

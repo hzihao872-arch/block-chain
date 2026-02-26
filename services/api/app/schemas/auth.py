@@ -20,3 +20,5 @@ class EmailRequest(BaseModel):
 
 class EmailResponse(BaseModel):
     ok: bool
+    verify_url: str | None = None
+    auto_confirm: bool = False

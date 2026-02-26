@@ -32,8 +32,13 @@ def wallet_verify(payload: WalletVerifyRequest, db: Session = Depends(get_db)):
 def email_request(payload: EmailRequest, db: Session = Depends(get_db)):
     if not settings.server_signing_secret:
         raise HTTPException(status_code=500, detail="SERVER_SIGNING_SECRET not set")
-    if not settings.smtp_host or not settings.smtp_user or not settings.smtp_pass:
-        raise HTTPException(status_code=500, detail="SMTP not configured")
+    if not settings.skip_email_verification:
+        if settings.resend_api_key:
+            if not (settings.resend_from or settings.smtp_from or settings.smtp_user):
+                raise HTTPException(status_code=500, detail="RESEND_FROM not set")
+        else:
+            if not settings.smtp_host or not settings.smtp_user or not settings.smtp_pass:
+                raise HTTPException(status_code=500, detail="SMTP not configured")
 
     commitment = (
         db.query(Commitment)
@@ -61,6 +66,9 @@ def email_request(payload: EmailRequest, db: Session = Depends(get_db)):
         settings.server_signing_secret,
     )
     verify_url = f"{settings.app_base_url}/email/confirm?token={token}"
+    if settings.skip_email_verification:
+        return EmailResponse(ok=True, verify_url=verify_url, auto_confirm=True)
+
     send_magic_link(payload.email, verify_url)
     return EmailResponse(ok=True)
 
