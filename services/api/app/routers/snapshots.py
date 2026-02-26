@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 from fastapi.responses import FileResponse, RedirectResponse
 from sqlalchemy.orm import Session
 
+from ..config import settings
 from ..db import get_db
 from ..models import Snapshot
 from ..utils.vault import (
