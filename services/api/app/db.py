@@ -9,7 +9,7 @@ if settings.database_url.startswith("sqlite"):
 elif settings.database_url.startswith("postgresql+psycopg"):
     # Supabase pooler (PgBouncer) can break server-side prepared statements.
     # Disable prepares to avoid DuplicatePreparedStatement errors.
-    _connect_args = {"prepare_threshold": 0, "prepared_statement_cache_size": 0}
+    _connect_args = {"prepare_threshold": 0}
 
 engine = create_engine(settings.database_url, connect_args=_connect_args)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
