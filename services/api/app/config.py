@@ -54,6 +54,8 @@ class Settings:
     smtp_pass: str = os.getenv("SMTP_PASS", "")
     smtp_use_tls: bool = _bool(os.getenv("SMTP_USE_TLS", "true"), default=True)
     smtp_from: str = os.getenv("SMTP_FROM", "").strip()
+    resend_api_key: str = os.getenv("RESEND_API_KEY", "").strip()
+    resend_from: str = os.getenv("RESEND_FROM", "").strip()
 
     server_signing_secret: str = os.getenv("SERVER_SIGNING_SECRET", "")
     vault_encryption_key: str = os.getenv("VAULT_ENCRYPTION_KEY", "")
