@@ -9,7 +9,8 @@ def send_magic_link(to_email: str, verify_url: str) -> None:
     body = f"Click to verify your email: {verify_url}"
     msg = MIMEText(body, "plain", "utf-8")
     msg["Subject"] = subject
-    msg["From"] = settings.smtp_user
+    from_addr = settings.smtp_from or settings.smtp_user
+    msg["From"] = from_addr
     msg["To"] = to_email
 
     if settings.smtp_use_tls:
