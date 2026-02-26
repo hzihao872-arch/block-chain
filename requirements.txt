@@ -1,1 +1,10 @@
--r services/api/requirements.txt
+fastapi==0.110.0
+uvicorn[standard]==0.27.1
+sqlalchemy>=2.0.36,<3
+psycopg2-binary==2.9.9
+storage3==0.12.2
+python-dotenv==1.0.1
+eth-account==0.11.1
+opentimestamps==0.4.5
+python-multipart==0.0.9
+cryptography==42.0.5
